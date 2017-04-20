@@ -11,3 +11,4 @@
 - A bunch of simple streams
 - Stream Piping
 - Filter abstraction
+- Tests 

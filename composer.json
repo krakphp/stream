@@ -10,7 +10,9 @@
         }
     ],
     "keywords": ["stream", "pipe", "php-stream", "filter", "stream-filter", "php_user_filter"],
-    "require": {},
+    "require": {
+        "peridot-php/peridot": "^1.19"
+    },
     "autoload": {
         "files": ["src/stream.php"],
         "psr-4": {

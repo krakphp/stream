@@ -44,8 +44,11 @@ function toStdout($mode = "w") {
     Useful functions for manipulating streams and filters
 **/
 
-function toStr($data) {
-    return stream_get_contents($data);
+function toStr($stream, $rewind = true) {
+    if ($rewind) {
+        rewind($stream);
+    }
+    return stream_get_contents($stream);
 }
 
 /** Appends the set of filters to source, copies data to dst, then removes filters */
