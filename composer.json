@@ -1,0 +1,26 @@
+{
+    "name": "krak/stream",
+    "type": "library",
+    "license": "MIT",
+    "description": "PHP streams and filtering made easy.",
+    "authors": [
+        {
+            "name": "RJ Garcia",
+            "email": "rj@bighead.net"
+        }
+    ],
+    "keywords": ["stream", "pipe", "php-stream", "filter", "stream-filter", "php_user_filter"],
+    "require": {},
+    "autoload": {
+        "files": ["src/stream.php"],
+        "psr-4": {
+            "Krak\\Stream\\": "src"
+        }
+    },
+    "require-dev": {
+        "krak/crypto": "^0.1.3"
+    },
+    "suggest": {
+        "krak/crypto": "For encrypting and decrypting streams."
+    }
+}
