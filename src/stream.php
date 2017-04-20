@@ -48,26 +48,36 @@ function toStr($data) {
     return stream_get_contents($data);
 }
 
+/** Appends the set of filters to source, copies data to dst, then removes filters */
 function pipe($src, array $filters, $dst) {
-    foreach ($filters as $filter) {
-        appendFilter($src, $filter);
-    }
+    $filter_resources = array_map(function($filter) use ($src) {
+        return appendFilter($src, $filter);
+    }, $filters);
 
     stream_copy_to_stream($src, $dst);
+
+    $filter_resources = array_reverse($filter_resources);
+    array_map('stream_filter_remove', $filter_resources);
 }
 
 function appendFilter($stream, $filter) {
     if ($filter[2] === null)  {
         array_pop($filter);
     }
-    stream_filter_append($stream, ...$filter);
+
+    return stream_filter_append($stream, ...$filter);
 }
 
 function prependFilter($stream, $filter) {
     if ($filter[2] === null)  {
         array_pop($filter);
     }
-    stream_filter_prepend($stream, ...$filter);
+
+    return stream_filter_prepend($stream, ...$filter);
+}
+
+function removeFilter($filter) {
+    return stream_filter_remove($filter);
 }
 
 function createFilter($name, $params = null, $read_write = STREAM_FILTER_READ) {
